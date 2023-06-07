@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import { User } from "../models/User.js"
 
 const createUser = async () => {
@@ -14,4 +15,26 @@ const createUser = async () => {
     }    
 }
 
-export { createUser }
+const userLogin = async (name, password) => {
+    const user = await User.findOne({
+        where: {
+            name,
+            password
+        }
+    })
+
+    if(!user){
+        throw new Error ('Nombre y/o password son incorrectos')
+    }
+
+    const token = jwt.sign({
+        name: user.name,
+        password: user.password
+    }, 'ClaveUltraSecreta')
+
+    return {
+        accessToken: token
+    }
+}
+
+export { createUser, userLogin }
