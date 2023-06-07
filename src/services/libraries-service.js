@@ -7,4 +7,11 @@ const getAll = async () => {
     return listLibrary;
 }
 
-export { getAll }
+const getById = async (id) => {
+    //Obtener todas las librerias
+    const library = await Library.findByPk(id);
+
+    return library;
+}
+
+export { getAll, getById }
