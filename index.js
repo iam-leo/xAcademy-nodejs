@@ -1,7 +1,7 @@
 import express from "express";
 import { routerLibraries } from "./src/routes/libraries-routes.js";
 import { routerBooks } from "./src/routes/book-routes.js";
-import { createUser } from "./src/controllers/user-controller.js";
+import { createUser } from "./src/services/user-service.js";
 
 
 const app = express();
