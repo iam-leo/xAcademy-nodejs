@@ -30,7 +30,11 @@ export const Book = db.define('libro', {
     },
     library: {
         type: DataTypes.INTEGER,
-        allowNull: false 
+        allowNull: false,
+        references: {
+            model: 'libreria',
+            key: 'id'
+          } 
     },
 }, {
     modelName: 'libro',

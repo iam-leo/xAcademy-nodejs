@@ -14,4 +14,11 @@ const getById = async (id) => {
     return book;
 }
 
-export { getAll, getById }
+const getBookLibrary = async (library) => {
+    //Obtener libros en una libreria
+    const booksLibrary = await Book.findAll({where: {library}});
+
+    return booksLibrary
+}
+
+export { getAll, getById, getBookLibrary }
