@@ -3,6 +3,7 @@ import { routerLibraries } from "./src/routes/libraries-routes.js";
 import { routerBooks } from "./src/routes/book-routes.js";
 import { createUser } from "./src/services/user-service.js";
 import { routesUser } from "./src/routes/user-routes.js";
+import { errorHandlerMiddleware } from "./src/middlewares/errorHandlerMiddleware.js";
 
 
 const app = express();
@@ -15,6 +16,7 @@ createUser();
 app.use('/library', routerLibraries);
 app.use('/book', routerBooks);
 app.use('/user', routesUser);
+app.use(errorHandlerMiddleware)
 
 app.get('/', (req, res) => {
     res.send('Hello World');
