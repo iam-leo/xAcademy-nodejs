@@ -55,7 +55,7 @@ const updateLibraryRow = async ( id, name, location, telefono) => {
         
             return libraryUpdated;
         }else{
-            throw new Error('Libreria no encontrada')
+            throw new Error('Librería no encontrada');
         }
         
     } catch (error) {
@@ -88,4 +88,24 @@ const validate = (name, location, telefono) => {
     }
 }
 
-export { getAll, getById, createLibraryRow, updateLibraryRow }
+const deleteLibraryRow = async (id) => {
+    try {
+        const library = await getById(id);
+
+        if(library){
+            //Marcamos como libreria eliminada
+            library.existe = 0           
+        
+            const libraryDeleted = await library.save();
+        
+            return libraryDeleted;
+        }else{
+            throw new Error('Librería no encontrada');
+        }
+        
+    } catch (error) {
+        throw error;
+    }
+}
+
+export { getAll, getById, createLibraryRow, updateLibraryRow, deleteLibraryRow }

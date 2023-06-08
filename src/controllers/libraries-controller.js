@@ -1,5 +1,5 @@
 import { getBookLibrary } from "../services/books-services.js";
-import { createLibraryRow, getAll, getById, updateLibraryRow } from "../services/libraries-service.js";
+import { createLibraryRow, deleteLibraryRow, getAll, getById, updateLibraryRow } from "../services/libraries-service.js";
 
 
 const getAllLibraries = async (req, res) =>{
@@ -52,4 +52,15 @@ const updateLibrary = async (req, res, next) => {
     }
 }
 
-export { getAllLibraries, getLibraryById, createLibrary, updateLibrary }
+const deleteLibrary = async (req, res, next) => {
+    const { id } = req.params;
+
+    try {
+        const library = await deleteLibraryRow( id );
+        res.status(200).send(library);
+    } catch (error) {
+        next(error)
+    }
+}
+
+export { getAllLibraries, getLibraryById, createLibrary, updateLibrary, deleteLibrary }
