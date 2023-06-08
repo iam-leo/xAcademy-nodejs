@@ -34,6 +34,37 @@ const createLibraryRow = async ( name, location, telefono, existe=1) => {
     return libraryCreated;
 }
 
+const updateLibraryRow = async ( id, name, location, telefono) => {
+    try {
+        const library = await getById(id);
+
+        if(library){
+            if(name){
+                library.name = name;
+            }
+        
+            if(location){
+                library.location = location;
+            }
+        
+            if(telefono){
+                library.telefono = telefono;
+            }           
+        
+            const libraryUpdated = await library.save();
+        
+            return libraryUpdated;
+        }else{
+            throw new Error('Libreria no encontrada')
+        }
+        
+    } catch (error) {
+        throw error;
+    }
+
+    
+}
+
 const validate = (name, location, telefono) => {
     if(name === ''){
         return {
@@ -57,4 +88,4 @@ const validate = (name, location, telefono) => {
     }
 }
 
-export { getAll, getById, createLibraryRow }
+export { getAll, getById, createLibraryRow, updateLibraryRow }
