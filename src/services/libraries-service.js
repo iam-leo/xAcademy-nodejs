@@ -9,7 +9,10 @@ const getAll = async () => {
         if(listLibrary.length === 0){
             throw new Error('No hay librerías');
         }else{
-            return listLibrary;
+
+            //Filtro las librerías existentes
+            const listLibraryExisting = listLibrary.filter( library => library.existe !== 0);
+            return listLibraryExisting;
         }   
     } catch (error) {
         throw error;
