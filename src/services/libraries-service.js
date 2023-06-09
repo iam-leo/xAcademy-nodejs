@@ -2,16 +2,37 @@ import { Library } from "../models/library.js";
 
 const getAll = async () => {
     //Obtener todas las librerias
-    const listLibrary = await Library.findAll();
+    try {
+        const listLibrary = await Library.findAll();
 
-    return listLibrary;
+        //Validar si existen librerias
+        if(listLibrary.length === 0){
+            throw new Error('No hay librerías');
+        }else{
+            return listLibrary;
+        }   
+    } catch (error) {
+        
+    }
+    
 }
 
 const getById = async (id) => {
-    //Obtener todas las librerias
-    const library = await Library.findByPk(id);
+    
+    try {
+        //Obtener todas las librerias
+        const library = await Library.findByPk(id);
 
-    return library;
+        //Validar que la libreria existe en la DB
+        if(!library || library.existe === 0){
+            throw new Error('No existe la librería');
+        }else{
+            return library;
+        }
+    } catch (error) {
+        throw error;
+    }
+    
 }
 
 const createLibraryRow = async ( name, location, telefono, existe=1) => {
