@@ -1,24 +1,22 @@
 import { createBookRow, deleteBookRow, getAll, getById, updateBookRow } from "../services/books-services.js";
 
 
-const getAllBooks = async (req, res) =>{
+const getAllBooks = async (req, res, next) =>{
     try {
         const books = await getAll();
         res.status(200).send(books);
     } catch (error) {
-        console.log(error);
-        res.status(500).send(error);
+        next(error);
     }    
 }
 
-const getBookById = async (req, res) =>{
+const getBookById = async (req, res, next) =>{
     try {
         const { id } = req.params
         const book = await getById(id);
         res.status(200).send(book);
     } catch (error) {
-        console.log(error);
-        res.status(500).send(error);
+        next(error);
     }    
 }
 

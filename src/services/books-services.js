@@ -2,15 +2,42 @@ import { getById as getLibraryById }  from "./libraries-service.js";
 import { Book } from "../models/book.js";
 
 const getAll = async () => {
+    
     //Obtener todas las librerias
-    const listBook = await Book.findAll();
+    try {
+        const listBook = await Book.findAll();
+        
+        //Validar si existen libros
+        if(listBook.length === 0){
+            throw new Error('No hay libros');
+        }else{
 
-    return listBook;
+            //Filtro los libros existentes
+            const listBookExisting = listBook.filter( book => book.existe !== 0);
+            return listBookExisting;
+        }
+    } catch (error) {
+        throw error;    
+    }
+    
+
+    
 }
 
 const getById = async (id) => {
     //Obtener todas las librerias
-    const book = await Book.findByPk(id);
+    try {
+        const book = await Book.findByPk(id);
+
+        //Validar si existe el libro
+        if(!book || book.existe === 0){
+            throw new Error('No existe el libro');
+        }else{
+            return book;
+        }        
+    } catch (error) {
+        throw error;
+    }
 
     return book;
 }
