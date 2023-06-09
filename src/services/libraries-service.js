@@ -12,7 +12,7 @@ const getAll = async () => {
             return listLibrary;
         }   
     } catch (error) {
-        
+        throw error;
     }
     
 }
