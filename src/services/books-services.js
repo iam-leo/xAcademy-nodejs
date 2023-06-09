@@ -126,4 +126,24 @@ const validateFields = async (isbn, titulo, autor, year, library) => {
     }
 }
 
-export { getAll, getById, getBookLibrary, createBookRow, updateBookRow }
+const deleteBookRow = async (id) => {
+    try {
+        const book = await getById(id);
+
+        if(book){
+            //Marcamos como libreria eliminada
+            book.existe = 0           
+        
+            const bookDeleted = await book.save();
+        
+            return bookDeleted;
+        }else{
+            throw new Error('Libro no encontrado');
+        }
+        
+    } catch (error) {
+        throw error;
+    }
+}
+
+export { getAll, getById, getBookLibrary, createBookRow, updateBookRow, deleteBookRow }

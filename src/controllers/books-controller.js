@@ -1,4 +1,4 @@
-import { createBookRow, getAll, getById, updateBookRow } from "../services/books-services.js";
+import { createBookRow, deleteBookRow, getAll, getById, updateBookRow } from "../services/books-services.js";
 
 
 const getAllBooks = async (req, res) =>{
@@ -44,4 +44,15 @@ const updateBook = async (req, res, next) => {
     }
 }
 
-export { getAllBooks, getBookById, createBook, updateBook }
+const deleteBook = async (req, res, next) => {
+    const { id } = req.params;
+
+    try {
+        const book = await deleteBookRow( id );
+        res.status(200).send(book);
+    } catch (error) {
+        next(error)
+    }
+}
+
+export { getAllBooks, getBookById, createBook, updateBook, deleteBook }
