@@ -44,6 +44,43 @@ const createBookRow = async ( isbn, titulo, autor, year, library) => {
     return bookCreated;
 }
 
+const updateBookRow = async ( id, isbn, titulo, autor, year, library) => {
+    try {
+        const book = await getById(id);
+
+        if(book){
+            if(isbn){
+                book.isbn = isbn;
+            }
+        
+            if(titulo){
+                book.titulo = titulo;
+            }
+        
+            if(autor){
+                book.autor = autor;
+            }           
+            
+            if(year){
+                book.year = year;
+            }           
+            
+            if(library){
+                book.library = library;
+            }           
+        
+            const bookUpdated = await book.save();
+        
+            return bookUpdated;
+        }else{
+            throw new Error('Libro no encontrado');
+        }
+        
+    } catch (error) {
+        throw error;
+    }
+}
+
 const validateFields = async (isbn, titulo, autor, year, library) => {
     if(typeof(isbn) !== 'number'){
         return {
@@ -89,4 +126,4 @@ const validateFields = async (isbn, titulo, autor, year, library) => {
     }
 }
 
-export { getAll, getById, getBookLibrary, createBookRow }
+export { getAll, getById, getBookLibrary, createBookRow, updateBookRow }
