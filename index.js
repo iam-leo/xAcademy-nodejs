@@ -20,12 +20,12 @@ initializeAuthentication();
 app.use('/library', routerLibraries);
 app.use('/book', routerBooks);
 app.use('/user', routesUser);
-app.use(errorHandlerMiddleware)
+app.use(errorHandlerMiddleware);
 
 app.get('/', (req, res) => {
-    res.send('Hello World');
+    res.send('xAcademy - Ejercicio Integrador Node.js');
 });
 
 app.listen(3000, () => {
     console.log('Servidor iniciado...!');
-})
+});
